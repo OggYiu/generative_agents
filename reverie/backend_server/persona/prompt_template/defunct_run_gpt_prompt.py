@@ -818,7 +818,7 @@ def run_gpt_prompt_act_obj_desc(act_game_object, act_desp, persona, verbose=Fals
   gpt_param = {"engine": llm_model_high, "max_tokens": 30, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  prompt_template = "persona/prompt_template/v2/generate_obj_event_v1.txt"
+  prompt_template = prompt_template_path_generate_obj_event_defunct
   prompt_input = create_prompt_input(act_game_object, act_desp, persona)
   prompt = generate_prompt(prompt_input, prompt_template)
   fail_safe = get_fail_safe(act_game_object)
@@ -1006,7 +1006,7 @@ def run_gpt_prompt_new_decomp_schedule(persona,
   gpt_param = {"engine": llm_model_high, "max_tokens": 1000, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/new_decomp_schedule_v1.txt"
+  prompt_template = prompt_template_path_new_decomp_schedule
   prompt_input = create_prompt_input(persona, 
                                      main_act_dur, 
                                      truncated_act_dur, 
@@ -1119,7 +1119,7 @@ def run_gpt_prompt_decide_to_talk(persona, target_persona, retrieved,test_input=
   gpt_param = {"engine": llm_model_high, "max_tokens": 20, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/decide_to_talk_v2.txt"
+  prompt_template = prompt_template_path_decide_to_talk
   prompt_input = create_prompt_input(persona, target_persona, retrieved,
                                      test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
@@ -1217,7 +1217,7 @@ def run_gpt_prompt_decide_to_react(persona, target_persona, retrieved,test_input
   gpt_param = {"engine": llm_model_high, "max_tokens": 20, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/decide_to_react_v1.txt"
+  prompt_template = prompt_template_path_decide_to_react
   prompt_input = create_prompt_input(persona, target_persona, retrieved,
                                      test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
@@ -1360,7 +1360,7 @@ def run_gpt_prompt_create_conversation(persona, target_persona, curr_loc,
   gpt_param = {"engine": llm_model_high, "max_tokens": 1000, 
                "temperature": 0.7, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/create_conversation_v2.txt"
+  prompt_template = prompt_template_path_create_conversation
   prompt_input = create_prompt_input(persona, target_persona, curr_loc, 
                                      test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
@@ -1410,7 +1410,7 @@ def run_gpt_prompt_summarize_conversation(persona, conversation, test_input=None
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/summarize_conversation_v1.txt"
+  prompt_template = prompt_template_path_summarize_conversation_defunct
   prompt_input = create_prompt_input(conversation, test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1464,7 +1464,7 @@ def run_gpt_prompt_extract_keywords(persona, description, test_input=None, verbo
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/get_keywords_v1.txt"
+  prompt_template = prompt_template_path_get_keywords
   prompt_input = create_prompt_input(description, test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1509,7 +1509,7 @@ def run_gpt_prompt_keyword_to_thoughts(persona, keyword, concept_summary, test_i
   gpt_param = {"engine": llm_model_high, "max_tokens": 40, 
                "temperature": 0.7, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/keyword_to_thoughts_v1.txt"
+  prompt_template = prompt_template_path_keyword_to_thoughts
   prompt_input = create_prompt_input(persona, keyword, concept_summary)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1564,7 +1564,7 @@ def run_gpt_prompt_convo_to_thoughts(persona,
   gpt_param = {"engine": llm_model_high, "max_tokens": 40, 
                "temperature": 0.7, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/convo_to_thoughts_v1.txt"
+  prompt_template = prompt_template_path_convo_to_thoughts
   prompt_input = create_prompt_input(init_persona_name,  
                                     target_persona_name,
                                     convo_str,
@@ -1847,7 +1847,7 @@ def run_gpt_prompt_agent_chat_summarize_ideas(persona, target_persona, statement
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/summarize_chat_ideas_v1.txt"
+  prompt_template = prompt_template_path_summarize_chat_ideas_defunct
   prompt_input = create_prompt_input(persona, target_persona, statements, curr_context)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1885,7 +1885,7 @@ def run_gpt_prompt_agent_chat_summarize_relationship(persona, target_persona, st
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/summarize_chat_relationship_v1.txt"
+  prompt_template = prompt_template_path_summarize_chat_relationship_defunct
   prompt_input = create_prompt_input(persona, target_persona, statements)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2004,7 +2004,7 @@ def run_gpt_prompt_summarize_ideas(persona, statements, question, test_input=Non
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/summarize_ideas_v1.txt"
+  prompt_template = prompt_template_path_summarize_ideas_defunct
   prompt_input = create_prompt_input(persona, statements, question)
   prompt = generate_prompt(prompt_input, prompt_template)
 
