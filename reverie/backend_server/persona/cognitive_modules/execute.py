@@ -13,6 +13,7 @@ from path_finder import *
 from utils import *
 
 def execute(persona, maze, personas, plan): 
+  print ("--- execute begin ---")
   """
   Given a plan (action's string address), we execute the plan (actually 
   outputs the tile coordinate path and the next coordinate for the 

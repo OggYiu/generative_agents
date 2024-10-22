@@ -7,7 +7,8 @@ Description: Wrapper functions for calling OpenAI APIs.
 import json
 import random
 import openai
-import time 
+import time
+import sys
 
 from utils import *
 
@@ -219,9 +220,9 @@ def GPT_request(prompt, gpt_parameter):
                 stream=gpt_parameter["stream"],
                 stop=gpt_parameter["stop"],)
     return response.choices[0].text
-  except: 
-    print ("TOKEN LIMIT EXCEEDED")
-    return "TOKEN LIMIT EXCEEDED"
+  except Exception as e:
+    print("error GPT_request, prompt:", prompt, ", gpt_parameter: ", gpt_parameter, ", e: ", e)
+    sys.exit(1)
 
 
 def generate_prompt(curr_input, prompt_lib_file): 
@@ -282,7 +283,7 @@ def get_embedding(text, model="text-embedding-ada-002"):
 
 
 if __name__ == '__main__':
-  gpt_parameter = {"engine": "text-davinci-003", "max_tokens": 50, 
+  gpt_parameter = {"engine": llm_model_high, "max_tokens": 50, 
                    "temperature": 0, "top_p": 1, "stream": False,
                    "frequency_penalty": 0, "presence_penalty": 0, 
                    "stop": ['"']}

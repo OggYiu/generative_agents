@@ -26,6 +26,7 @@ def print_run_prompts(prompt_template=None,
                       prompt_input=None,
                       prompt=None, 
                       output=None): 
+  print("\n\n\n=== BEGIN print_run_prompts ========================================================")
   print (f"=== {prompt_template}")
   print ("~~~ persona    ---------------------------------------------------")
   print (persona.name, "\n")
