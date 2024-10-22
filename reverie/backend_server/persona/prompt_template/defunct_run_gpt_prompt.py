@@ -1633,7 +1633,7 @@ def run_gpt_prompt_event_poignancy(persona, event_description, test_input=None, 
   gpt_param = {"engine": llm_model_high, "max_tokens": 3, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/poignancy_event_v1.txt"
+  prompt_template = prompt_template_path_poignancy_event_defunct
   prompt_input = create_prompt_input(persona, event_description)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1673,7 +1673,7 @@ def run_gpt_prompt_thought_poignancy(persona, event_description, test_input=None
   gpt_param = {"engine": llm_model_high, "max_tokens": 3, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/poignancy_thought_v1.txt"
+  prompt_template = prompt_template_path_poignancy_thought_defunct
   prompt_input = create_prompt_input(persona, event_description)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1714,7 +1714,7 @@ def run_gpt_prompt_chat_poignancy(persona, event_description, test_input=None, v
   gpt_param = {"engine": llm_model_high, "max_tokens": 3, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/poignancy_chat_v1.txt"
+  prompt_template = prompt_template_path_poignancy_chat_defunct
   prompt_input = create_prompt_input(persona, event_description)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1757,7 +1757,7 @@ def run_gpt_prompt_focal_pt(persona, statements, n, test_input=None, verbose=Fal
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/generate_focal_pt_v1.txt"
+  prompt_template = prompt_template_path_generate_focal_pt_defunct
   prompt_input = create_prompt_input(persona, statements, n)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1804,7 +1804,7 @@ def run_gpt_prompt_insight_and_guidance(persona, statements, n, test_input=None,
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/insight_and_evidence_v1.txt"
+  prompt_template = prompt_template_path_insight_and_evidence
   prompt_input = create_prompt_input(persona, statements, n)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -1960,7 +1960,7 @@ def run_gpt_prompt_agent_chat(persona, target_persona,
   gpt_param = {"engine": llm_model_high, "max_tokens": 2000, 
                "temperature": 0.7, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/agent_chat_v1.txt"
+  prompt_template = prompt_template_path_agent_chat_defunct
   prompt_input = create_prompt_input(persona, target_persona, curr_context, init_summ_idea, target_summ_idea)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2047,7 +2047,7 @@ def run_gpt_prompt_generate_next_convo_line(persona, interlocutor_desc, prev_con
   gpt_param = {"engine": llm_model_high, "max_tokens": 250, 
                "temperature": 1, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/generate_next_convo_line_v1.txt"
+  prompt_template = prompt_template_path_generate_next_convo_line
   prompt_input = create_prompt_input(persona, interlocutor_desc, prev_convo, retrieved_summary)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2087,7 +2087,7 @@ def run_gpt_prompt_generate_whisper_inner_thought(persona, whisper, test_input=N
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/whisper_inner_thought_v1.txt"
+  prompt_template = prompt_template_path_whisper_inner_thought
   prompt_input = create_prompt_input(persona, whisper)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2124,7 +2124,7 @@ def run_gpt_prompt_planning_thought_on_convo(persona, all_utt, test_input=None, 
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/planning_thought_on_convo_v1.txt"
+  prompt_template = prompt_template_path_planning_thought_on_convo
   prompt_input = create_prompt_input(persona, all_utt)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2161,7 +2161,7 @@ def run_gpt_prompt_memo_on_convo(persona, all_utt, test_input=None, verbose=Fals
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/memo_on_convo_v1.txt"
+  prompt_template = prompt_template_path_memo_on_convo_defunct
   prompt_input = create_prompt_input(persona, all_utt)
   prompt = generate_prompt(prompt_input, prompt_template)
 

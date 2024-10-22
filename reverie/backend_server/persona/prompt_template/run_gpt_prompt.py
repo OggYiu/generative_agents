@@ -1720,7 +1720,7 @@ def run_gpt_prompt_event_poignancy(persona, event_description, test_input=None, 
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/poignancy_event_v1.txt" ########
+  prompt_template = prompt_template_path_poignancy_event
   prompt_input = create_prompt_input(persona, event_description)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = "5" ########
@@ -1730,28 +1730,8 @@ def run_gpt_prompt_event_poignancy(persona, event_description, test_input=None, 
                                           __chat_func_validate, __chat_func_clean_up, True)
   if output != False: 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # ChatGPT Plugin ===========================================================
-
-
-
-
-  # gpt_param = {"engine": llm_model_high, "max_tokens": 3, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v2/poignancy_event_v1.txt"
-  # prompt_input = create_prompt_input(persona, event_description)
-  # prompt = generate_prompt(prompt_input, prompt_template)
-
-  # fail_safe = get_fail_safe()
-  # output = safe_generate_response(prompt, gpt_param, 5, fail_safe,
-  #                                  __func_validate, __func_clean_up)
-
-  # if debug or verbose: 
-  #   print_run_prompts(prompt_template, persona, gpt_param, 
-  #                     prompt_input, prompt, output)
   
-  # return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
+  
 
 def run_gpt_prompt_thought_poignancy(persona, event_description, test_input=None, verbose=False): 
   def create_prompt_input(persona, event_description, test_input=None): 
@@ -1791,7 +1771,7 @@ def run_gpt_prompt_thought_poignancy(persona, event_description, test_input=None
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/poignancy_thought_v1.txt" ########
+  prompt_template = prompt_template_path_poignancy_thought
   prompt_input = create_prompt_input(persona, event_description)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = "5" ########
@@ -1801,27 +1781,7 @@ def run_gpt_prompt_thought_poignancy(persona, event_description, test_input=None
                                           __chat_func_validate, __chat_func_clean_up, True)
   if output != False: 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # ChatGPT Plugin ===========================================================
-
-
-
-  # gpt_param = {"engine": llm_model_high, "max_tokens": 3, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v2/poignancy_thought_v1.txt"
-  # prompt_input = create_prompt_input(persona, event_description)
-  # prompt = generate_prompt(prompt_input, prompt_template)
-
-  # fail_safe = get_fail_safe()
-  # output = safe_generate_response(prompt, gpt_param, 5, fail_safe,
-  #                                  __func_validate, __func_clean_up)
-
-  # if debug or verbose: 
-  #   print_run_prompts(prompt_template, persona, gpt_param, 
-  #                     prompt_input, prompt, output)
   
-  # return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
 
 
 def run_gpt_prompt_chat_poignancy(persona, event_description, test_input=None, verbose=False): 
@@ -1863,7 +1823,7 @@ def run_gpt_prompt_chat_poignancy(persona, event_description, test_input=None, v
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/poignancy_chat_v1.txt" ########
+  prompt_template = prompt_template_path_poignancy_chat
   prompt_input = create_prompt_input(persona, event_description)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = "5" ########
@@ -1873,29 +1833,7 @@ def run_gpt_prompt_chat_poignancy(persona, event_description, test_input=None, v
                                           __chat_func_validate, __chat_func_clean_up, True)
   if output != False: 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # ChatGPT Plugin ===========================================================
-
-
-
-
-  # gpt_param = {"engine": llm_model_high, "max_tokens": 3, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v2/poignancy_chat_v1.txt"
-  # prompt_input = create_prompt_input(persona, event_description)
-  # prompt = generate_prompt(prompt_input, prompt_template)
-
-  # fail_safe = get_fail_safe()
-  # output = safe_generate_response(prompt, gpt_param, 5, fail_safe,
-  #                                  __func_validate, __func_clean_up)
-
-  # if debug or verbose: 
-  #   print_run_prompts(prompt_template, persona, gpt_param, 
-  #                     prompt_input, prompt, output)
   
-  # return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-
 
 
 
@@ -1939,7 +1877,7 @@ def run_gpt_prompt_focal_pt(persona, statements, n, test_input=None, verbose=Fal
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/generate_focal_pt_v1.txt" ########
+  prompt_template = prompt_template_path_generate_focal_pt_first
   prompt_input = create_prompt_input(persona, statements, n)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = '["What should Jane do for lunch", "Does Jane like strawberry", "Who is Jane"]' ########
@@ -1959,7 +1897,7 @@ def run_gpt_prompt_focal_pt(persona, statements, n, test_input=None, verbose=Fal
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/generate_focal_pt_v1.txt"
+  prompt_template = prompt_template_path_generate_focal_pt_second
   prompt_input = create_prompt_input(persona, statements, n)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2010,7 +1948,7 @@ def run_gpt_prompt_insight_and_guidance(persona, statements, n, test_input=None,
   gpt_param = {"engine": llm_model_high, "max_tokens": 150, 
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/insight_and_evidence_v1.txt"
+  prompt_template = prompt_template_path_insight_and_evidence
   prompt_input = create_prompt_input(persona, statements, n)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2221,7 +2159,7 @@ def run_gpt_prompt_agent_chat(maze, persona, target_persona,
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/agent_chat_v1.txt" ########
+  prompt_template = prompt_template_path_agent_chat
   prompt_input = create_prompt_input(persona, target_persona, curr_context, init_summ_idea, target_summ_idea)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = '[["Jane Doe", "Hi!"], ["John Doe", "Hello there!"] ... ]' ########
@@ -2232,30 +2170,7 @@ def run_gpt_prompt_agent_chat(maze, persona, target_persona,
   # print ("HERE END JULY 23 -- ----- ") ########
   if output != False: 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # ChatGPT Plugin ===========================================================
-
-
-
-
-
-
-  # gpt_param = {"engine": llm_model_high, "max_tokens": 2000, 
-  #              "temperature": 0.7, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v2/agent_chat_v1.txt"
-  # prompt_input = create_prompt_input(persona, target_persona, curr_context, init_summ_idea, target_summ_idea)
-  # prompt = generate_prompt(prompt_input, prompt_template)
-
-  # fail_safe = get_fail_safe()
-  # output = safe_generate_response(prompt, gpt_param, 5, fail_safe,
-  #                                  __func_validate, __func_clean_up)
-
-  # if debug or verbose: 
-  #   print_run_prompts(prompt_template, persona, gpt_param, 
-  #                     prompt_input, prompt, output)
   
-  # return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
 
 # =======================
 # =======================
@@ -2343,39 +2258,12 @@ def run_gpt_prompt_generate_next_convo_line(persona, interlocutor_desc, prev_con
 
 
 
-  # # ChatGPT Plugin ===========================================================
-  # def __chat_func_clean_up(gpt_response, prompt=""): ############
-  #   return gpt_response.split('"')[0].strip()
-
-  # def __chat_func_validate(gpt_response, prompt=""): ############
-  #   try: 
-  #     __func_clean_up(gpt_response, prompt)
-  #     return True
-  #   except:
-  #     return False 
-
-  # print ("asdhfapsh8p9hfaiafdsi;ldfj as DEBUG 15") ########
-  # gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v3_ChatGPT/generate_next_convo_line_v1.txt" ########
-  # prompt_input = create_prompt_input(persona, interlocutor_desc, prev_convo, retrieved_summary)  ########
-  # prompt = generate_prompt(prompt_input, prompt_template)
-  # example_output = 'Hello' ########
-  # special_instruction = 'The output should be a string that responds to the question. Again, only use the context included in the "Note" to generate the response' ########
-  # fail_safe = get_fail_safe() ########
-  # output = ChatGPT_safe_generate_response(prompt, example_output, special_instruction, 3, fail_safe,
-  #                                         __chat_func_validate, __chat_func_clean_up, True)
-  # if output != False: 
-  #   return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # # ChatGPT Plugin ===========================================================
-
 
 
   gpt_param = {"engine": llm_model_high, "max_tokens": 250, 
                "temperature": 1, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/generate_next_convo_line_v1.txt"
+  prompt_template = prompt_template_path_generate_next_convo_line
   prompt_input = create_prompt_input(persona, interlocutor_desc, prev_convo, retrieved_summary)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2415,7 +2303,7 @@ def run_gpt_prompt_generate_whisper_inner_thought(persona, whisper, test_input=N
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/whisper_inner_thought_v1.txt"
+  prompt_template = prompt_template_path_whisper_inner_thought
   prompt_input = create_prompt_input(persona, whisper)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2452,7 +2340,7 @@ def run_gpt_prompt_planning_thought_on_convo(persona, all_utt, test_input=None, 
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/planning_thought_on_convo_v1.txt"
+  prompt_template = prompt_template_path_planning_thought_on_convo
   prompt_input = create_prompt_input(persona, all_utt)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2503,7 +2391,7 @@ def run_gpt_prompt_memo_on_convo(persona, all_utt, test_input=None, verbose=Fals
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/memo_on_convo_v1.txt" ########
+  prompt_template = prompt_template_path_memo_on_convo_first
   prompt_input = create_prompt_input(persona, all_utt)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = 'Jane Doe was interesting to talk to.' ########
@@ -2518,7 +2406,7 @@ def run_gpt_prompt_memo_on_convo(persona, all_utt, test_input=None, verbose=Fals
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/memo_on_convo_v1.txt"
+  prompt_template = prompt_template_path_memo_on_convo_second
   prompt_input = create_prompt_input(persona, all_utt)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -2559,7 +2447,7 @@ def run_gpt_generate_safety_score(persona, comment, test_input=None, verbose=Fal
     return None
 
   print ("11")
-  prompt_template = "persona/prompt_template/safety/anthromorphosization_v1.txt" 
+  prompt_template = prompt_template_path_anthromorphosization
   prompt_input = create_prompt_input(comment) 
   print ("22")
   prompt = generate_prompt(prompt_input, prompt_template)
@@ -2674,7 +2562,7 @@ def run_gpt_generate_iterative_chat_utt(maze, init_persona, target_persona, retr
     return cleaned_dict
 
   print ("11")
-  prompt_template = "persona/prompt_template/v3_ChatGPT/iterative_convo_v1.txt" 
+  prompt_template = prompt_template_path_iterative_convo
   prompt_input = create_prompt_input(maze, init_persona, target_persona, retrieved, curr_context, curr_chat) 
   print ("22")
   prompt = generate_prompt(prompt_input, prompt_template)
