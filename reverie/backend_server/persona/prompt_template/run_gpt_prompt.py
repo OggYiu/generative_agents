@@ -69,7 +69,7 @@ def run_gpt_prompt_wake_up_hour(persona, test_input=None, verbose=False):
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 5, 
              "temperature": 0.8, "top_p": 1, "stream": False,
              "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  prompt_template = "persona/prompt_template/v2/wake_up_hour_v1.txt"
+  prompt_template = prompt_template_path_wake_up_hour
   prompt_input = create_prompt_input(persona, test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
   fail_safe = get_fail_safe()
@@ -141,7 +141,7 @@ def run_gpt_prompt_daily_plan(persona,
   gpt_param = {"engine": llm_model_high, "max_tokens": 500, 
                "temperature": 1, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/daily_planning_v6.txt"
+  prompt_template = prompt_template_path_daily_planning
   prompt_input = create_prompt_input(persona, wake_up_hour, test_input)
   prompt = generate_prompt(prompt_input, prompt_template)
   fail_safe = get_fail_safe()
@@ -230,45 +230,11 @@ def run_gpt_prompt_generate_hourly_schedule(persona,
   def get_fail_safe(): 
     fs = "asleep"
     return fs
-
-  # # ChatGPT Plugin ===========================================================
-  # def __chat_func_clean_up(gpt_response, prompt=""): ############
-  #   cr = gpt_response.strip()
-  #   if cr[-1] == ".":
-  #     cr = cr[:-1]
-  #   return cr
-
-  # def __chat_func_validate(gpt_response, prompt=""): ############
-  #   try: __func_clean_up(gpt_response, prompt="")
-  #   except: return False
-  #   return True
-
-  # print ("asdhfapsh8p9hfaiafdsi;ldfj as DEBUG 10") ########
-  # gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v3_ChatGPT/generate_hourly_schedule_v2.txt" ########
-  # prompt_input = create_prompt_input(persona, 
-  #                                    curr_hour_str, 
-  #                                    p_f_ds_hourly_org,
-  #                                    hour_str, 
-  #                                    intermission2,
-  #                                    test_input)  ########
-  # prompt = generate_prompt(prompt_input, prompt_template)
-  # example_output = "studying for her music classes" ########
-  # special_instruction = "The output should ONLY include the part of the sentence that completes the last line in the schedule above." ########
-  # fail_safe = get_fail_safe() ########
-  # output = ChatGPT_safe_generate_response(prompt, example_output, special_instruction, 3, fail_safe,
-  #                                         __chat_func_validate, __chat_func_clean_up, True)
-  # if output != False: 
-  #   return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # # ChatGPT Plugin ===========================================================
-
-
+  
   gpt_param = {"engine": llm_model_high, "max_tokens": 50, 
                "temperature": 0.5, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  prompt_template = "persona/prompt_template/v2/generate_hourly_schedule_v2.txt"
+  prompt_template = prompt_template_path_generate_hourly_schedule
   prompt_input = create_prompt_input(persona, 
                                      curr_hour_str, 
                                      p_f_ds_hourly_org,
@@ -429,7 +395,7 @@ def run_gpt_prompt_task_decomp(persona,
   gpt_param = {"engine": llm_model_high, "max_tokens": 1000, 
              "temperature": 0, "top_p": 1, "stream": False,
              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v2/task_decomp_v3.txt"
+  prompt_template = prompt_template_path_task_decomp
   prompt_input = create_prompt_input(persona, task, duration)
   prompt = generate_prompt(prompt_input, prompt_template)
   fail_safe = get_fail_safe()
@@ -570,42 +536,12 @@ def run_gpt_prompt_action_sector(action_description,
     return fs
 
 
-  # # ChatGPT Plugin ===========================================================
-  # def __chat_func_clean_up(gpt_response, prompt=""): ############
-  #   cr = gpt_response.strip()
-  #   return cr
-
-  # def __chat_func_validate(gpt_response, prompt=""): ############
-  #   try: 
-  #     gpt_response = __func_clean_up(gpt_response, prompt="")
-  #   except: 
-  #     return False
-  #   return True 
-
-  # print ("asdhfapsh8p9hfaiafdsi;ldfj as DEBUG 20") ########
-  # gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v3_ChatGPT/action_location_sector_v2.txt" ########
-  # prompt_input = create_prompt_input(action_description, persona, maze)  ########
-  # prompt = generate_prompt(prompt_input, prompt_template)
-  # example_output = "Johnson Park" ########
-  # special_instruction = "The value for the output must contain one of the area options above verbatim (including lower/upper case)." ########
-  # fail_safe = get_fail_safe() ########
-  # output = ChatGPT_safe_generate_response(prompt, example_output, special_instruction, 3, fail_safe,
-  #                                         __chat_func_validate, __chat_func_clean_up, True)
-  # if output != False: 
-  #   return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # # ChatGPT Plugin ===========================================================
-
-
-
 
 
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v1/action_location_sector_v1.txt"
+  prompt_template = prompt_template_path_action_location_sector
   prompt_input = create_prompt_input(action_description, persona, maze)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -702,7 +638,7 @@ def run_gpt_prompt_action_arena(action_description,
   gpt_param = {"engine": llm_model_high, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v1/action_location_object_vMar11.txt"
+  prompt_template = prompt_template_path_action_location_object
   prompt_input = create_prompt_input(action_description, persona, maze, act_world, act_sector)
   prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -758,7 +694,7 @@ def run_gpt_prompt_action_game_object(action_description,
   gpt_param = {"engine": llm_model_high, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v1/action_object_v2.txt"
+  prompt_template = prompt_template_path_action_object
   prompt_input = create_prompt_input(action_description, 
                                      persona, 
                                      temp_address, 
@@ -828,7 +764,7 @@ def run_gpt_prompt_pronunciatio(action_description, persona, verbose=False):
   gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  prompt_template = "persona/prompt_template/v3_ChatGPT/generate_pronunciatio_v1.txt" ########
+  prompt_template = prompt_template_path_generate_pronunciatio
   prompt_input = create_prompt_input(action_description)  ########
   prompt = generate_prompt(prompt_input, prompt_template)
   example_output = "🛁🧖‍♀️" ########
@@ -838,31 +774,6 @@ def run_gpt_prompt_pronunciatio(action_description, persona, verbose=False):
                                           __chat_func_validate, __chat_func_clean_up, True)
   if output != False: 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # ChatGPT Plugin ===========================================================
-
-
-
-
-
-  # gpt_param = {"engine": llm_model_high, "max_tokens": 15, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  # prompt_template = "persona/prompt_template/v2/generate_pronunciatio_v1.txt"
-  # prompt_input = create_prompt_input(action_description)
-
-  # prompt = generate_prompt(prompt_input, prompt_template)
-
-  # fail_safe = get_fail_safe()
-  # output = safe_generate_response(prompt, gpt_param, 5, fail_safe,
-  #                                  __func_validate, __func_clean_up)
-
-  # if debug or verbose: 
-  #   print_run_prompts(prompt_template, persona, gpt_param, 
-  #                     prompt_input, prompt, output)
-  
-  # return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-
 
 
 
@@ -900,43 +811,11 @@ def run_gpt_prompt_event_triple(action_description, persona, verbose=False):
     return fs
 
 
-  # ChatGPT Plugin ===========================================================
-  # def __chat_func_clean_up(gpt_response, prompt=""): ############
-  #   cr = gpt_response.strip()
-  #   cr = [i.strip() for i in cr.split(")")[0].split(",")]
-  #   return cr
-
-  # def __chat_func_validate(gpt_response, prompt=""): ############
-  #   try: 
-  #     gpt_response = __func_clean_up(gpt_response, prompt="")
-  #     if len(gpt_response) != 2: 
-  #       return False
-  #   except: return False
-  #   return True 
-
-  # print ("asdhfapsh8p9hfaiafdsi;ldfj as DEBUG 5") ########
-  # gpt_param = {"engine": llm_model_cheap, "max_tokens": 15, 
-  #              "temperature": 0, "top_p": 1, "stream": False,
-  #              "frequency_penalty": 0, "presence_penalty": 0, "stop": None}
-  # prompt_template = "persona/prompt_template/v3_ChatGPT/generate_event_triple_v1.txt" ########
-  # prompt_input = create_prompt_input(action_description, persona)  ########
-  # prompt = generate_prompt(prompt_input, prompt_template)
-  # example_output = "(Jane Doe, cooking, breakfast)" ########
-  # special_instruction = "The value for the output must ONLY contain the triple. If there is an incomplete element, just say 'None' but there needs to be three elements no matter what." ########
-  # fail_safe = get_fail_safe(persona) ########
-  # output = ChatGPT_safe_generate_response(prompt, example_output, special_instruction, 3, fail_safe,
-  #                                         __chat_func_validate, __chat_func_clean_up, True)
-  # if output != False: 
-  #   return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-  # ChatGPT Plugin ===========================================================
-
-
-
 
   gpt_param = {"engine": llm_model_high, "max_tokens": 30, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  prompt_template = "persona/prompt_template/v2/generate_event_triple_v1.txt"
+  prompt_template = prompt_template_path_generate_event_triple
   prompt_input = create_prompt_input(action_description, persona)
   prompt = generate_prompt(prompt_input, prompt_template)
   fail_safe = get_fail_safe(persona) ########
@@ -1069,7 +948,7 @@ def run_gpt_prompt_act_obj_event_triple(act_game_object, act_obj_desc, persona, 
   gpt_param = {"engine": llm_model_high, "max_tokens": 30, 
                "temperature": 0, "top_p": 1, "stream": False,
                "frequency_penalty": 0, "presence_penalty": 0, "stop": ["\n"]}
-  prompt_template = "persona/prompt_template/v2/generate_event_triple_v1.txt"
+  prompt_template = prompt_template_path_generate_event_triple
   prompt_input = create_prompt_input(act_game_object, act_obj_desc)
   prompt = generate_prompt(prompt_input, prompt_template)
   fail_safe = get_fail_safe(act_game_object)
