@@ -6,13 +6,11 @@ Description: Wrapper functions for calling OpenAI APIs.
 """
 import json
 import random
-import openai
 import time
 import sys
 
+from helper import *
 from utils import *
-
-openai.api_key = openai_api_key
 
 def temp_sleep(seconds=0.1):
   time.sleep(seconds)
@@ -20,11 +18,7 @@ def temp_sleep(seconds=0.1):
 def ChatGPT_single_request(prompt): 
   temp_sleep()
 
-  completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": prompt}]
-  )
-  return completion["choices"][0]["message"]["content"]
+  return llm_chat_create(llm_model_cheap, prompt)
 
 
 # ============================================================================
@@ -46,11 +40,7 @@ def GPT4_request(prompt):
   temp_sleep()
 
   try: 
-    completion = openai.ChatCompletion.create(
-    model="gpt-4", 
-    messages=[{"role": "user", "content": prompt}]
-    )
-    return completion["choices"][0]["message"]["content"]
+    return llm_chat_create(llm_model_high, prompt)
   
   except: 
     print ("ChatGPT ERROR")
@@ -70,12 +60,8 @@ def ChatGPT_request(prompt):
     a str of GPT-3's response. 
   """
   # temp_sleep()
-  try: 
-    completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": prompt}]
-    )
-    return completion["choices"][0]["message"]["content"]
+  try:
+    return llm_chat_create(llm_model_cheap, prompt)
   
   except: 
     print ("ChatGPT ERROR")
@@ -209,7 +195,7 @@ def GPT_request(prompt, gpt_parameter):
   """
   temp_sleep()
   try: 
-    response = openai.Completion.create(
+    response = llm_completion_create(
                 model=gpt_parameter["engine"],
                 prompt=prompt,
                 temperature=gpt_parameter["temperature"],
@@ -219,7 +205,7 @@ def GPT_request(prompt, gpt_parameter):
                 presence_penalty=gpt_parameter["presence_penalty"],
                 stream=gpt_parameter["stream"],
                 stop=gpt_parameter["stop"],)
-    return response.choices[0].text
+    return response
   except Exception as e:
     print("error GPT_request, prompt:", prompt, ", gpt_parameter: ", gpt_parameter, ", e: ", e)
     sys.exit(1)
@@ -274,13 +260,11 @@ def safe_generate_response(prompt,
   return fail_safe_response
 
 
-def get_embedding(text, model="text-embedding-ada-002"):
+def get_embedding(text, model=embedding_model):
   text = text.replace("\n", " ")
   if not text: 
     text = "this is blank"
-  return openai.Embedding.create(
-          input=[text], model=model)['data'][0]['embedding']
-
+  return llm_embedding_create(model, text)
 
 if __name__ == '__main__':
   gpt_parameter = {"engine": llm_model_high, "max_tokens": 50, 
