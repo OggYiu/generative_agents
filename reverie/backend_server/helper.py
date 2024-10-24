@@ -5,10 +5,15 @@ import ollama
 # openai.api_key = openai_api_key
 
 from openai import OpenAI
-client = OpenAI(
-    base_url = 'http://localhost:11434/v1',
-    api_key='ollama', # required, but unused
-)
+
+if use_openai:
+  client = OpenAI(
+  )
+else:
+  client = OpenAI(
+      base_url = 'http://localhost:11434/v1',
+      api_key='ollama', # required, but unused
+  )
 
 def llm_chat_create(model, prompt):
 #   completion = openai.ChatCompletion.create(
