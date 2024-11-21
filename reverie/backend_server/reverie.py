@@ -55,6 +55,11 @@ class ReverieServer:
     # reverie/meta/json's fork variable. 
     self.sim_code = sim_code
     sim_folder = f"{fs_storage}/{self.sim_code}"
+    
+    # Check if sim_folder exists and delete it
+    if delete_sim_folder_if_exist and os.path.exists(sim_folder):
+        shutil.rmtree(sim_folder)
+
     copyanything(fork_folder, sim_folder)
 
     with open(f"{sim_folder}/reverie/meta.json") as json_file:  
@@ -397,7 +402,11 @@ class ReverieServer:
           # {"persona": {"Maria Lopez": {"movement": [58, 9]}},
           #  "persona": {"Klaus Mueller": {"movement": [38, 12]}}, 
           #  "meta": {curr_time: <datetime>}}
-          curr_move_file = f"{sim_folder}/movement/{self.step}.json"
+          
+          movement_folder = f"{sim_folder}/movement"
+          if not os.path.exists(movement_folder):
+              os.makedirs(movement_folder)
+          curr_move_file = f"{movement_folder}/{self.step}.json"
           with open(curr_move_file, "w") as outfile: 
             outfile.write(json.dumps(movements, indent=2))
 
@@ -430,8 +439,16 @@ class ReverieServer:
     # <sim_folder> points to the current simulation folder.
     sim_folder = f"{fs_storage}/{self.sim_code}"
 
-    while True: 
-      sim_command = input("Enter option: ")
+    if default_sim_command is not None and len(default_sim_command) > 0:
+      start_sim_command = default_sim_command
+
+    while True:
+      if start_sim_command is not None and len(start_sim_command) > 0:
+        sim_command = start_sim_command
+        start_sim_command = ""
+      else:
+        sim_command = input("Enter option: ")
+
       sim_command = sim_command.strip()
       ret_str = ""
 
@@ -605,8 +622,15 @@ if __name__ == '__main__':
   #                    "July1_the_ville_isabella_maria_klaus-step-3-21")
   # rs.open_server()
 
-  origin = input("Enter the name of the forked simulation: ").strip()
-  target = input("Enter the name of the new simulation: ").strip()
+  if default_forked_simulation is not None and len(default_forked_simulation) > 0:
+    origin = default_forked_simulation
+  else:
+    origin = input("Enter the name of the forked simulation: ").strip()
+
+  if default_new_simulation is not None and len(default_new_simulation) > 0:
+    target = default_new_simulation
+  else:
+    target = input("Enter the name of the new simulation: ").strip()
 
   rs = ReverieServer(origin, target)
   rs.open_server()
