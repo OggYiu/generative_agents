@@ -11,6 +11,9 @@ import time
 
 from utils import *
 
+# from langchain_openai import ChatOpenAI
+# llm = ChatOpenAI()
+
 openai.api_key = openai_api_key
 
 def temp_sleep(seconds=0.1):
