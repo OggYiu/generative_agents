@@ -11,8 +11,9 @@ import time
 
 from utils import *
 
-# from langchain_openai import ChatOpenAI
-# llm = ChatOpenAI()
+from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
+embeddings = OpenAIEmbeddings()
 
 openai.api_key = openai_api_key
 
@@ -22,11 +23,20 @@ def temp_sleep(seconds=0.1):
 def ChatGPT_single_request(prompt): 
   temp_sleep()
 
-  completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": prompt}]
-  )
-  return completion["choices"][0]["message"]["content"]
+  if original_llm_call:
+    completion = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo", 
+      messages=[{"role": "user", "content": prompt}]
+    )
+    return completion["choices"][0]["message"]["content"]
+  else:
+    llm = ChatOpenAI(model="gpt-3.5-turbo")
+    messages = [
+      ("system", ""),
+      ("human", prompt),
+    ]
+    ai_msg = llm.invoke(messages)
+    return ai_msg.content
 
 
 # ============================================================================
@@ -47,12 +57,21 @@ def GPT4_request(prompt):
   """
   temp_sleep()
 
-  try: 
-    completion = openai.ChatCompletion.create(
-    model="gpt-4", 
-    messages=[{"role": "user", "content": prompt}]
-    )
-    return completion["choices"][0]["message"]["content"]
+  try:
+    if original_llm_call:
+      completion = openai.ChatCompletion.create(
+      model="gpt-4", 
+      messages=[{"role": "user", "content": prompt}]
+      )
+      return completion["choices"][0]["message"]["content"]
+    else:
+      llm = ChatOpenAI(model="gpt-4")
+      messages = [
+        ("system", ""),
+        ("human", prompt),
+      ]
+      ai_msg = llm.invoke(messages)
+      return ai_msg.content
   
   except Exception as e: 
     print (e)
@@ -73,12 +92,20 @@ def ChatGPT_request(prompt):
   """
   # temp_sleep()
   try: 
-    completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": prompt}]
-    )
-    return completion["choices"][0]["message"]["content"]
-  
+    if original_llm_call:
+      completion = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo", 
+      messages=[{"role": "user", "content": prompt}]
+      )
+      return completion["choices"][0]["message"]["content"]
+    else:
+      llm = ChatOpenAI(model="gpt-3.5-turbo")
+      messages = [
+        ("system", ""),
+        ("human", prompt),
+      ]
+      ai_msg = llm.invoke(messages)
+      return ai_msg.content
   except Exception as e: 
     print (e)
     return e
@@ -213,18 +240,35 @@ def GPT_request(prompt, gpt_parameter):
     a str of GPT-3's response. 
   """
   temp_sleep()
-  try: 
-    response = openai.Completion.create(
-                model=gpt_parameter["engine"],
-                prompt=prompt,
-                temperature=gpt_parameter["temperature"],
-                max_tokens=gpt_parameter["max_tokens"],
-                top_p=gpt_parameter["top_p"],
-                frequency_penalty=gpt_parameter["frequency_penalty"],
-                presence_penalty=gpt_parameter["presence_penalty"],
-                stream=gpt_parameter["stream"],
-                stop=gpt_parameter["stop"],)
-    return response.choices[0].text
+  try:
+    if original_llm_call:
+      response = openai.Completion.create(
+                  model=gpt_parameter["engine"],
+                  prompt=prompt,
+                  temperature=gpt_parameter["temperature"],
+                  max_tokens=gpt_parameter["max_tokens"],
+                  top_p=gpt_parameter["top_p"],
+                  frequency_penalty=gpt_parameter["frequency_penalty"],
+                  presence_penalty=gpt_parameter["presence_penalty"],
+                  stream=gpt_parameter["stream"],
+                  stop=gpt_parameter["stop"],)
+      return response.choices[0].text
+    else:
+      llm = ChatOpenAI(
+        model=gpt_parameter["engine"],
+        max_tokens=gpt_parameter["max_tokens"],
+        temperature=gpt_parameter["temperature"],
+        top_p=gpt_parameter["top_p"],
+        # stream=gpt_parameter["stream"],
+        frequency_penalty=gpt_parameter["frequency_penalty"],
+        presence_penalty=gpt_parameter["presence_penalty"],
+        stop=gpt_parameter["stop"])
+      messages = [
+        ("system", ""),
+        ("human", prompt),
+      ]
+      ai_msg = llm.invoke(messages)
+      return ai_msg.content
   except Exception as e: 
     print (e)
     return e
@@ -279,12 +323,21 @@ def safe_generate_response(prompt,
   return fail_safe_response
 
 
-def get_embedding(text, model="text-embedding-ada-002"):
+def get_embedding(text, model=embedding_model):
   text = text.replace("\n", " ")
   if not text: 
     text = "this is blank"
-  return openai.Embedding.create(
-          input=[text], model=model)['data'][0]['embedding']
+
+  try:
+    if original_llm_call:
+      return openai.Embedding.create(
+              input=[text], model=model)['data'][0]['embedding']
+    else:
+      embeddings.model = model
+      embeddings.embed_query(text)
+  except Exception as e:
+    print (e)
+    return e
 
 
 if __name__ == '__main__':
